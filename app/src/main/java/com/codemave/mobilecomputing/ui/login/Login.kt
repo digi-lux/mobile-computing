@@ -22,10 +22,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.google.accompanist.insets.systemBarsPadding
@@ -74,9 +72,9 @@ fun Login(
             )
             Spacer(modifier = Modifier.height(10.dp))
             Button(
-                onClick = { navController.navigate("payment") },
+                onClick = { navController.navigate("home") },
                 enabled = true,
-                modifier = Modifier.fillMaxWidth(),
+                modifier = Modifier.fillMaxWidth().size(55.dp),
                 shape = MaterialTheme.shapes.small
             ) {
                 Text(text = "Login")
@@ -84,9 +82,3 @@ fun Login(
         }
     }
 }
-
-//@Preview
-//@Composable
-//fun Preview() {
-//    Login(navController = NavController())
-//}
