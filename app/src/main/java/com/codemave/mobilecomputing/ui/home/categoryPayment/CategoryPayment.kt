@@ -99,7 +99,7 @@ private fun PaymentListItem(
 
         // category
         Text(
-            text = payment.paymentCategory,
+            text = payment.paymentCategoryId.toString(),
             maxLines = 1,
             style = MaterialTheme.typography.subtitle2,
             modifier = Modifier.constrainAs(paymentCategory) {
@@ -118,10 +118,11 @@ private fun PaymentListItem(
 
         // date
         Text(
-            text = when {
-                payment.paymentDate != null -> { payment.paymentDate.formatToString() }
-                else -> Date().formatToString()
-            },
+//            text = when {
+//                payment.paymentDate != null -> { payment.paymentDate.formatToString() }
+//                else -> Date().formatToString()
+//            },
+            text = "",
             maxLines = 1,
             overflow = TextOverflow.Ellipsis,
             style = MaterialTheme.typography.caption,
