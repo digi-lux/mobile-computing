@@ -3,8 +3,6 @@ package com.codemave.mobilecomputing.ui
 import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.codemave.mobilecomputing.MobileComputingAppState
-import com.codemave.mobilecomputing.rememberMobileComputingAppState
 import com.codemave.mobilecomputing.ui.home.Home
 import com.codemave.mobilecomputing.ui.login.Login
 import com.codemave.mobilecomputing.ui.payment.Payment

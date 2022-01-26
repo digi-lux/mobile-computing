@@ -21,8 +21,8 @@ class CategoryPaymentViewModel : ViewModel() {
                 Payment(
                     paymentId = x.toLong(),
                     paymentTitle = "$x payment",
-                    paymentCategory = "Food",
-                    paymentDate = Date()
+                    paymentCategoryId = 1,
+                    paymentDate = 123
                 )
             )
         }

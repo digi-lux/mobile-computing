@@ -1,4 +1,4 @@
-package com.codemave.mobilecomputing
+package com.codemave.mobilecomputing.ui
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
