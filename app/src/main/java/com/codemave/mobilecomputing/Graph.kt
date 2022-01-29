@@ -3,6 +3,7 @@ package com.codemave.mobilecomputing
 import android.content.Context
 import androidx.room.Room
 import com.codemave.mobilecomputing.data.repository.CategoryRepository
+import com.codemave.mobilecomputing.data.repository.PaymentRepository
 import com.codemave.mobilecomputing.data.room.MobileComputingDatabase
 
 /**
@@ -16,6 +17,12 @@ object Graph {
     val categoryRepository by lazy {
         CategoryRepository(
             categoryDao = database.categoryDao()
+        )
+    }
+
+    val paymentRepository by lazy {
+        PaymentRepository(
+            paymentDao = database.paymentDao()
         )
     }
 

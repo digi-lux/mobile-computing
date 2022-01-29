@@ -4,7 +4,6 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
@@ -27,15 +26,22 @@ import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.codemave.mobilecomputing.R
+import com.codemave.mobilecomputing.data.entity.Category
 import com.codemave.mobilecomputing.data.entity.Payment
+import com.codemave.mobilecomputing.data.room.PaymentToCategory
+import com.codemave.mobilecomputing.util.viewModelProviderFactoryOf
 import java.text.SimpleDateFormat
 import java.util.*
 
 @Composable
 fun CategoryPayment(
+    categoryId: Long,
     modifier: Modifier = Modifier
 ) {
-    val viewModel: CategoryPaymentViewModel = viewModel()
+    val viewModel: CategoryPaymentViewModel = viewModel(
+        key = "category_list_$categoryId",
+        factory = viewModelProviderFactoryOf { CategoryPaymentViewModel(categoryId) }
+    )
     val viewState by viewModel.state.collectAsState()
 
     Column(modifier = modifier) {
@@ -47,7 +53,7 @@ fun CategoryPayment(
 
 @Composable
 private fun PaymentList(
-    list: List<Payment>
+    list: List<PaymentToCategory>
 ) {
     LazyColumn(
         contentPadding = PaddingValues(0.dp),
@@ -55,7 +61,8 @@ private fun PaymentList(
     ) {
         items(list) { item ->
             PaymentListItem(
-                payment = item,
+                payment = item.payment,
+                category = item.category,
                 onClick = {},
                 modifier = Modifier.fillParentMaxWidth(),
             )
@@ -66,6 +73,7 @@ private fun PaymentList(
 @Composable
 private fun PaymentListItem(
     payment: Payment,
+    category: Category,
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
@@ -99,7 +107,7 @@ private fun PaymentListItem(
 
         // category
         Text(
-            text = payment.paymentCategoryId.toString(),
+            text = category.name,
             maxLines = 1,
             style = MaterialTheme.typography.subtitle2,
             modifier = Modifier.constrainAs(paymentCategory) {
@@ -118,11 +126,7 @@ private fun PaymentListItem(
 
         // date
         Text(
-//            text = when {
-//                payment.paymentDate != null -> { payment.paymentDate.formatToString() }
-//                else -> Date().formatToString()
-//            },
-            text = "",
+            text = payment.paymentDate.toDateString(),
             maxLines = 1,
             overflow = TextOverflow.Ellipsis,
             style = MaterialTheme.typography.caption,
@@ -162,4 +166,9 @@ private fun PaymentListItem(
 
 private fun Date.formatToString(): String {
     return SimpleDateFormat("MMMM dd, yyyy", Locale.getDefault()).format(this)
+}
+
+private fun Long.toDateString(): String {
+    return SimpleDateFormat("MMMM dd, yyyy", Locale.getDefault()).format(Date(this))
+
 }
