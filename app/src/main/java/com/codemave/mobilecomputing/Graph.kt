@@ -14,6 +14,8 @@ import com.codemave.mobilecomputing.data.room.MobileComputingDatabase
 object Graph {
     lateinit var database: MobileComputingDatabase
 
+    lateinit var appContext: Context
+
     val categoryRepository by lazy {
         CategoryRepository(
             categoryDao = database.categoryDao()
@@ -27,6 +29,7 @@ object Graph {
     }
 
     fun provide(context: Context) {
+        appContext = context
         database = Room.databaseBuilder(context, MobileComputingDatabase::class.java, "mcData.db")
             .fallbackToDestructiveMigration() // don't use this in production app
             .build()
