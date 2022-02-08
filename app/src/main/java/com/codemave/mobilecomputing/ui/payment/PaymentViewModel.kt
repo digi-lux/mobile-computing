@@ -100,7 +100,21 @@ private fun createSuccessNotification() {
         .setContentText("Your countdown completed successfully")
         .setPriority(NotificationCompat.PRIORITY_DEFAULT)
 
-    with(NotificationManagerCompat.from(Graph.appContext)) {
+    with(from(Graph.appContext)) {
+        //notificationId is unique for each notification that you define
+        notify(notificationId, builder.build())
+    }
+}
+
+private fun createErrorNotification() {
+    val notificationId = 1
+    val builder = NotificationCompat.Builder(Graph.appContext, "CHANNEL_ID")
+        .setSmallIcon(R.drawable.ic_launcher_background)
+        .setContentTitle("Error! Download incomplete")
+        .setContentText("Your countdown encountered an error and stopped abruptly")
+        .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+
+    with(from(Graph.appContext)) {
         //notificationId is unique for each notification that you define
         notify(notificationId, builder.build())
     }
@@ -113,7 +127,7 @@ private fun createPaymentMadeNotification(payment: Payment) {
         .setContentTitle("New payment made")
         .setContentText("You paid $${payment.paymentAmount} on ${payment.paymentDate.toDateString()}")
         .setPriority(NotificationCompat.PRIORITY_HIGH)
-    with(NotificationManagerCompat.from(Graph.appContext)) {
+    with(from(Graph.appContext)) {
         notify(notificationId, builder.build())
     }
 }
