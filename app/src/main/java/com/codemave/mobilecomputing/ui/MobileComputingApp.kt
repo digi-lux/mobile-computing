@@ -5,6 +5,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.codemave.mobilecomputing.ui.home.Home
 import com.codemave.mobilecomputing.ui.login.Login
+import com.codemave.mobilecomputing.ui.maps.PaymentLocationMap
 import com.codemave.mobilecomputing.ui.payment.Payment
 
 @Composable
@@ -24,7 +25,11 @@ fun MobileComputingApp(
             )
         }
         composable(route = "payment") {
-            Payment(onBackPress = appState::navigateBack)
+            Payment(onBackPress = appState::navigateBack, navController = appState.navController)
         }
+        composable(route = "map") {
+            PaymentLocationMap(navController = appState.navController)
+        }
+
     }
 }
